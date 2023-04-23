@@ -1,33 +1,33 @@
 package com.example.mytravelapp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Users {
 
-    HashMap<String,User> registeredUsers;
-
+    //guarda los datos, no los carga aun
+    FirebaseFirestore db;
     Users(){
-         registeredUsers = new HashMap<>();
+        db = FirebaseFirestore.getInstance();
     }
+
+
 
     public void addUser(String[] data) throws Exception{
-        if(registeredUsers.containsKey(data[0])){
-            throw new Exception("E-mail ja registrat");
-        }
-        User usuari = new User(data[0], data[1], data[2], data[3]);
-        registeredUsers.put(data[0],usuari);
+        db.collection("users").document(data[0]).set(new User(data[0],data[1],data[2],data[3]));
     }
 
 
-    public User login(String email, String password) throws Exception{
-        if(!registeredUsers.containsKey(email)){
-            throw new Exception("Email no registrat");
-        }
-        if (!password.equals(registeredUsers.get(email).getPassword())){
-            throw new Exception("Contrasenya incorrecte");
-        }
-        return registeredUsers.get(email);
+    public void login(String email){
+        db.collection("users").document(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Controller cr = Controller.getInstance();
+                User user = documentSnapshot.toObject(User.class);
+                cr.setLoggedUser(user);
+            }
+        });
     }
 
     /*

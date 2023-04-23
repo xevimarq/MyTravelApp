@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".mainviatjesActivty">
 
     <!-- Header -->
     <TextView
@@ -80,14 +80,16 @@
             android:scaleType="centerInside"
             android:padding="16dp"
             android:background="@android:color/transparent"/>
+
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/profile_icon"
-            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:onClick="profileButtonClick"
             android:padding="16dp"
-            android:background="@android:color/transparent"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/profile_icon" />
     </LinearLayout>
 
     <ImageButton

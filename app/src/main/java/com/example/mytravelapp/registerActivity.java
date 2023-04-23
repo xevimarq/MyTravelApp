@@ -1,19 +1,32 @@
 package com.example.mytravelapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class registerActivity extends AppCompatActivity {
 
     Controller controller;
+
+    FirebaseAuth mAuth;
 
     private Button registerButon;
     private EditText email, nom, cognom, password;
@@ -23,6 +36,7 @@ public class registerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mAuth = FirebaseAuth.getInstance();
         controller = Controller.getInstance();
 
         //els guardem a les variables corresponents
@@ -75,17 +89,30 @@ public class registerActivity extends AppCompatActivity {
         String[] dades = {email.getText().toString().trim(),password.getText().toString().trim(),nom.getText().toString().trim(),cognom.getText().toString().trim()};
         TextView texto = findViewById(R.id.textView);
         texto.setText("a");
-        try {
-            controller.addUser(dades);
-            texto.setText("b");
-            startActivity(new Intent(this, loginActivity.class));
-            texto.setText(("c"));
-        }
-        catch (Exception e){
-            //pasar-ho com error en bombolla jeje
-            e.getMessage();
-        }
 
+        mAuth.createUserWithEmailAndPassword(email.getText().toString().trim(), password.getText().toString().trim())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            try {
+                                controller.addUser(dades);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                            texto.setText("b");
+                            texto.setText(("c"));
+                            finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(registerActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
 

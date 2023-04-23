@@ -1,13 +1,21 @@
 package com.example.mytravelapp;
 
+import android.util.Log;
+
 public class Controller {
 
     private static Controller INSTANCE;
 
-    private Users users = new Users();
+    private Users users;
     User loggedUser;
+    //a este metodo se accede desde el users
+    public void setLoggedUser(User user){
+        loggedUser = user;
+    }
 
-    private Controller(){};
+    private Controller(){
+        users = new Users();
+    };
 
     public static Controller getInstance(){
         if(INSTANCE == null){
@@ -23,17 +31,13 @@ public class Controller {
             users.addUser(dades);
         }
         catch (Exception e){
+            Log.w("a", "catched");
             throw e;
         }
     }
 
-    void login(String email, String password) throws Exception {
-        try {
-            loggedUser = users.login(email,password);
-        }
-        catch (Exception e){
-            throw e;
-        }
+    void login(String email){
+        users.login(email);
     }
 
     String getName(){
@@ -41,7 +45,7 @@ public class Controller {
     }
 
     String getSurname(){
-        return  loggedUser.getName();
+        return  loggedUser.getCognom();
     }
 
 

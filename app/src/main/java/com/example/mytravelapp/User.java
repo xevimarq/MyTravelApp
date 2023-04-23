@@ -1,10 +1,15 @@
 package com.example.mytravelapp;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String email, password, name, cognom;
 
 
+    public User(){
+
+    }
     public User(String email, String password, String name, String cognom) {
         this.email = email;
         this.password = password;
