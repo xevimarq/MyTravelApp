@@ -1,6 +1,8 @@
 package com.example.mytravelapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ public class mainviatjesActivty extends AppCompatActivity {
 
     Controller controller;
     ImageButton createButton;
+    RecyclerView vistaViatjes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +23,12 @@ public class mainviatjesActivty extends AppCompatActivity {
         controller = Controller.getInstance();
 
         createButton = findViewById(R.id.add_button);
+        vistaViatjes = findViewById(R.id.llistaMain);
+        GridLayoutManager layoutManager=new GridLayoutManager(this,1);
+        vistaViatjes.setLayoutManager(layoutManager);
+        controller.setRecyclerView(vistaViatjes, getApplicationContext());
 
         createButton.setOnClickListener(this::createNew);
-
 
     }
 

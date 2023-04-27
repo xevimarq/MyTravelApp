@@ -8,12 +8,15 @@ public class Users {
 
     //guarda los datos, no los carga aun
     FirebaseFirestore db;
-    Users(){
-        db = FirebaseFirestore.getInstance();
+    Users(FirebaseFirestore db_){
+        db = db_;
     }
 
 
 
+    public void updateUser(User user){
+        db.collection("users").document(user.getEmail()).set(user);
+    }
     public void addUser(String[] data) throws Exception{
         db.collection("users").document(data[0]).set(new User(data[0],data[1],data[2],data[3]));
     }
@@ -29,19 +32,5 @@ public class Users {
             }
         });
     }
-
-    /*
-
-    por si usamos arraylist y no hashmap
-
-    private boolean checkEmail(String email){
-        for(User user: registeredUsers){
-            if(user.getEmail().equals(email)){
-                return false;
-            }
-        }
-        return true;
-    }
-    */
 
 }

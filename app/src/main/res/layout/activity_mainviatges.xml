@@ -33,7 +33,11 @@
         app:layout_constraintTop_toBottomOf="@id/header_text"
         app:layout_constraintBottom_toTopOf="@id/footer_layout">
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/llistaMain"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:clickable="false" />
     </LinearLayout>
 
     <!-- Footer -->

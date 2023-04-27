@@ -1,11 +1,13 @@
 package com.example.mytravelapp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable {
 
     private String email, password, name, cognom;
 
+    private ArrayList<String> identificadorViatje;
 
     public User(){
 
@@ -15,7 +17,10 @@ public class User implements Serializable {
         this.password = password;
         this.name = name;
         this.cognom = cognom;
+        identificadorViatje = new ArrayList<>();
     }
+
+    //el id sera de formato (8 digitos hexadecimales),
 
     public String getEmail() {
         return email;
@@ -47,5 +52,25 @@ public class User implements Serializable {
 
     public void setCognom(String cognom) {
         this.cognom = cognom;
+    }
+
+    public boolean checkViatje(String nom){
+        if(identificadorViatje.contains(getEmail()+"."+nom)){
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList<String> getIdentificadorViatje() {
+        return identificadorViatje;
+    }
+
+    public void addViatje(String nom, String inici, String fin){
+        String idViatje = nom;
+        identificadorViatje.add(idViatje);
+
+    }
+    public void setIdentificadorViatje(ArrayList<String> identificadorViatje) {
+        this.identificadorViatje = identificadorViatje;
     }
 }
