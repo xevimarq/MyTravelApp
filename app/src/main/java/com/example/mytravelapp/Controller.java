@@ -82,6 +82,8 @@ public class Controller {
         return  loggedUser.getCognom();
     }
 
+    String getMail(){return loggedUser.getEmail();}
+
 
     //hay que hacer que haga algun tipo de wait para que tanto el adapter como el cambio de actividad se haga a la vez
     boolean addViatje(String nomViatje, String inici, String fin){
