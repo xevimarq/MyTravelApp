@@ -32,6 +32,13 @@
         app:layout_constraintTop_toBottomOf="@id/header_text"
         app:layout_constraintBottom_toTopOf="@id/footer_layout">
 
+        <ImageView
+            android:id="@+id/image_viatje"
+            android:layout_width="390dp"
+            android:layout_height="91dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/camara_icon" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

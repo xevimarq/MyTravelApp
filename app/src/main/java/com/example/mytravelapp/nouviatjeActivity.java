@@ -1,6 +1,7 @@
 package com.example.mytravelapp;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,12 +10,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+
+import java.io.File;
+import java.io.IOException;
 
 public class nouviatjeActivity extends AppCompatActivity {
     Controller controller;
@@ -23,12 +31,16 @@ public class nouviatjeActivity extends AppCompatActivity {
     Button createButton, uploadButton;
     EditText nom, inici, fi;
 
+    ImageView imatge;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nouviatge);
 
         controller = Controller.getInstance();
+
+        imatge = findViewById(R.id.image_viatje);
 
         createButton = findViewById(R.id.botoCrear);
         createButton.setEnabled(false);
@@ -79,7 +91,9 @@ public class nouviatjeActivity extends AppCompatActivity {
 
 
     public void uploadPhoto(View view){
+        imatge.setImageURI(filepath);
         mGetContent.launch("image/*");
+
     }
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
@@ -93,6 +107,7 @@ public class nouviatjeActivity extends AppCompatActivity {
         if(controller.addViatje(nom.getText().toString().trim(), inici.getText().toString().trim(),fi.getText().toString().trim())) {
             if(filepath!=null){
                 controller.afegirFoto(nom.getText().toString().trim(),filepath, 0);
+
             }
             finish();
 
