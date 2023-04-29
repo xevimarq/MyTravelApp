@@ -1,6 +1,7 @@
 package com.example.mytravelapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,9 +25,11 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>{
     private ArrayList<Viatje> dades;
+    private Controller cr;
     private Context mcontext;
 
     public RecyclerViewAdapter(ArrayList<Viatje> recyclerDataArrayList, Context mcontext) {
+        cr = Controller.getInstance();
         this.dades = recyclerDataArrayList;
         this.mcontext = mcontext;
     }
@@ -62,6 +65,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         holder.nom.setText(viatje.getNom());
         holder.data.setText(viatje.getIniciViatje()+"-"+viatje.getFiViatje());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cambiarActivitat = new Intent(mcontext, viatjeActivity.class);
+                cambiarActivitat.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                cr.setViatjeActual(holder.getAdapterPosition());
+                mcontext.startActivity(cambiarActivitat);
+            }
+        });
     }
 
     @Override

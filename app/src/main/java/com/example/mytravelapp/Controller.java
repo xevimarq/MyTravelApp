@@ -20,6 +20,8 @@ public class Controller {
 
     private Users users;
     private gestorViatjes viatjes;
+
+    private int viatjeActual;
     User loggedUser;
     //a este metodo se accede desde el users
     public void setLoggedUser(User user){
@@ -106,5 +108,9 @@ public class Controller {
 
     public void setIdViatjesPublics(ArrayList<String> idViatjesPublics) {
         this.idViatjesPublics = idViatjesPublics;
+    }
+
+    public void setViatjeActual(int viatje){
+        viatjeActual = viatje;
     }
 }

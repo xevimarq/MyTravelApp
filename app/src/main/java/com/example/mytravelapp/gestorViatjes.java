@@ -48,4 +48,11 @@ public class gestorViatjes {
             }
         });
     }
+
+    public boolean addPersona(int viatje, String email){
+        if(llistat.get(viatje).getEditors().contains(email)){
+            return false;
+        }
+        return true;
+    }
 }

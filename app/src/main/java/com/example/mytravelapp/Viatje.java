@@ -1,5 +1,8 @@
 package com.example.mytravelapp;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
