@@ -57,6 +57,7 @@ public class nouviatjeActivity extends AppCompatActivity {
 
 
     }
+
     //listeners per activar el butó
     private TextWatcher activarBoto = new TextWatcher() {
         @Override
@@ -91,15 +92,14 @@ public class nouviatjeActivity extends AppCompatActivity {
 
 
     public void uploadPhoto(View view){
-        imatge.setImageURI(filepath);
         mGetContent.launch("image/*");
-
     }
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri uri) {
                     filepath = uri;
+                    imatge.setImageURI(filepath);
                 }
             });
 
