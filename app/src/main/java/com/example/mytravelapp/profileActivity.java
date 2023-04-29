@@ -35,7 +35,10 @@ public class profileActivity extends AppCompatActivity {
         }
         public void logout(View view){
             mAuth.signOut();
-            startActivity(new Intent(this, loginActivity.class));
+            Intent sortir = new Intent(this, loginActivity.class);
+            //esto cierra todas las actividades
+            finishAffinity();
+            startActivity(sortir);
             finish();
         }
 }

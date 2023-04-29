@@ -1,6 +1,7 @@
 package com.example.mytravelapp;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -17,6 +18,8 @@ public class Users {
     public void updateUser(User user){
         db.collection("users").document(user.getEmail()).set(user);
     }
+
+
     public void addUser(String[] data) throws Exception{
         db.collection("users").document(data[0]).set(new User(data[0],data[1],data[2],data[3]));
     }
