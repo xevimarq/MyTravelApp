@@ -34,7 +34,7 @@ public class profileActivity extends AppCompatActivity {
             mail.setText(controller.getMail());
         }
         public void logout(View view){
-            //mAuth.
+            mAuth.signOut();
             startActivity(new Intent(this, loginActivity.class));
             finish();
         }
