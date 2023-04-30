@@ -19,6 +19,8 @@ public class Viatje implements Serializable {
     ArrayList<String> editors;
     ArrayList<Boolean> publicParts;
 
+    ArrayList<String> identificadorImatge;
+
     Viatje(String nom, String inici, String fi, String email){
         this.nom = nom;
         idViatje=email+"."+nom;
@@ -27,6 +29,7 @@ public class Viatje implements Serializable {
         administrador = email;
         editors = new ArrayList<>();
         publicParts = new ArrayList<>();
+        identificadorImatge = new ArrayList<>();
         //las 4 partes que pueden ser publicas
 
         publicParts.add(false);
@@ -35,6 +38,19 @@ public class Viatje implements Serializable {
         publicParts.add(false);
 
     }
+    public ArrayList<String> getIdentificadorImatge() {
+        return identificadorImatge;
+    }
+
+    public void addImatge(String id){
+        String idImatge = id;
+        identificadorImatge.add(idImatge);
+
+    }
+    public void setIdentificadorImatge(ArrayList<String> id) {
+        this.identificadorImatge = id;
+    }
+
 
     public String getNom() {
         return nom;
