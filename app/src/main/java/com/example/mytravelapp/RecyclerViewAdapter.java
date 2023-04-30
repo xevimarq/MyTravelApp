@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -50,8 +51,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.RecyclerViewHolder holder, int position) {
         // Set the data to textview and imageview.
         Viatje viatje = dades.get(position);
-        Log.w("a","images/"+viatje.getAdministrador()+"/"+viatje.getNom()+"/portada.jpeg" );
-        StorageReference st = FirebaseStorage.getInstance().getReference("images/"+viatje.getAdministrador()+"/"+viatje.getNom()+"/portada");
+        if(viatje.getHasPortada()) {
+            StorageReference st = FirebaseStorage.getInstance().getReference("images/" + viatje.getAdministrador() + "/" + viatje.getNom() + "/portada");
+            Glide.with(mcontext).load(st).centerCrop().into(holder.foto);
+        }
+        /*
         try {
             File localFile = File.createTempFile(viatje.getNom()+"Portada",".jpeg");
             st.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -63,6 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        */
         holder.nom.setText(viatje.getNom());
         holder.data.setText(viatje.getIniciViatje()+"-"+viatje.getFiViatje());
         holder.itemView.setOnClickListener(new View.OnClickListener() {

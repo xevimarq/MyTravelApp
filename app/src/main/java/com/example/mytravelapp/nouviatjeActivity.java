@@ -104,7 +104,7 @@ public class nouviatjeActivity extends AppCompatActivity {
             });
 
     public void createNew(View view){
-        if(controller.addViatje(nom.getText().toString().trim(), inici.getText().toString().trim(),fi.getText().toString().trim())) {
+        if(controller.addViatje(nom.getText().toString().trim(), inici.getText().toString().trim(),fi.getText().toString().trim(),filepath!=null)) {
             if(filepath!=null){
                 controller.afegirFoto(nom.getText().toString().trim(),filepath, 0);
 

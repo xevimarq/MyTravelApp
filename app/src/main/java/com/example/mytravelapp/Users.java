@@ -32,6 +32,7 @@ public class Users {
                 Controller cr = Controller.getInstance();
                 User user = documentSnapshot.toObject(User.class);
                 cr.setLoggedUser(user);
+                cr.loadViatjes();
             }
         });
     }
