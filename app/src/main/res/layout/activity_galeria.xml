@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".nouviatjeActivity">
+    tools:context=".galeriaActivity">
 
     <!-- Header -->
     <TextView
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/blue"
-        android:text="Nou viatge"
+        android:text="Galeria"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textSize="20sp"
@@ -23,6 +23,7 @@
 
     <!-- Formulari -->
     <LinearLayout
+        android:id="@+id/formulari_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -32,81 +33,11 @@
         app:layout_constraintTop_toBottomOf="@id/header_text"
         app:layout_constraintBottom_toTopOf="@id/footer_layout">
 
-        <ImageView
-            android:id="@+id/image_viatje"
-            android:layout_width="390dp"
-            android:layout_height="91dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@drawable/camara_icon" />
-
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/llistaFotos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nom viatge:"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:padding="12dp"
-            android:textAllCaps="true"/>
-
-        <EditText
-            android:id="@+id/nomViatge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:hint="Nom del viatge"
-            android:padding="16dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Data inici:"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:textAllCaps="true"
-            android:padding="12dp"/>
-
-        <EditText
-            android:id="@+id/iniciText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:hint="Data inici"
-            android:padding="16dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Data final:"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:textAllCaps="true"
-            android:padding="12dp"/>
-
-        <EditText
-            android:id="@+id/iniciFinal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:hint="Data final"
-            android:padding="16dp" />
-
-        <Button
-            android:id="@+id/uploadButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/blue"
-            android:padding="12dp"
-            android:text="Upload Foto"
-            android:textAllCaps="true" />
-
-        <Button
-            android:id="@+id/botoCrear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/blue"
-            android:padding="16dp"
-            android:text="Crear viatge" />
-
+            android:layout_height="616dp"
+            android:clickable="false" />
     </LinearLayout>
 
     <!-- Footer -->
@@ -155,7 +86,6 @@
             android:background="@android:color/transparent"/>
 
         <ImageButton
-            android:id="@+id/profileButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -166,6 +96,18 @@
             android:src="@drawable/profile_icon" />
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/add_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/add_icon"
+        android:scaleType="centerInside"
+        android:background="@android:color/transparent"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/formulari_layout"
+        app:layout_constraintEnd_toEndOf="@id/formulari_layout"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

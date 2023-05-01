@@ -34,7 +34,6 @@ public class profileActivity extends AppCompatActivity {
             mail.setText(controller.getMail());
         }
         public void logout(View view){
-            //mAuth.
             mAuth.signOut();
             Intent sortir = new Intent(this, loginActivity.class);
             //esto cierra todas las actividades

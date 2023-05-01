@@ -13,13 +13,16 @@ public class Viatje implements Serializable {
     Viatje(){
     }
 
+    boolean hasPortada;
     String idViatje, nom;
     String iniciViatje, fiViatje;
     String administrador;
     ArrayList<String> editors;
     ArrayList<Boolean> publicParts;
 
-    Viatje(String nom, String inici, String fi, String email){
+    ArrayList<String> identificadorImatge;
+
+    Viatje(String nom, String inici, String fi, String email, Boolean _hasPortada){
         this.nom = nom;
         idViatje=email+"."+nom;
         iniciViatje = inici;
@@ -27,6 +30,8 @@ public class Viatje implements Serializable {
         administrador = email;
         editors = new ArrayList<>();
         publicParts = new ArrayList<>();
+        identificadorImatge = new ArrayList<>();
+        hasPortada = _hasPortada;
         //las 4 partes que pueden ser publicas
 
         publicParts.add(false);
@@ -35,6 +40,19 @@ public class Viatje implements Serializable {
         publicParts.add(false);
 
     }
+    public ArrayList<String> getIdentificadorImatge() {
+        return identificadorImatge;
+    }
+
+    public void addImatge(String id){
+        String idImatge = id;
+        identificadorImatge.add(idImatge);
+
+    }
+    public void setIdentificadorImatge(ArrayList<String> id) {
+        this.identificadorImatge = id;
+    }
+
 
     public String getNom() {
         return nom;
@@ -91,4 +109,13 @@ public class Viatje implements Serializable {
     public void setPublicParts(ArrayList<Boolean> publicParts) {
         this.publicParts = publicParts;
     }
+
+    public boolean getHasPortada() {
+        return hasPortada;
+    }
+
+    public void setHasPortada(boolean hasPortada) {
+        this.hasPortada = hasPortada;
+    }
+
 }
