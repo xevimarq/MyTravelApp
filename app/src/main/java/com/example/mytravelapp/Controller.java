@@ -18,6 +18,9 @@ public class Controller {
 
     private ArrayList<String> idViatjesPublics;
 
+    //per a controlar els metodes asincrons
+    public boolean viatjesCarregats = false;
+
     private Users users;
     private gestorViatjes viatjes;
 
@@ -41,12 +44,19 @@ public class Controller {
         return INSTANCE;
     }
 
+    public void loadViatjes(){
+
+        ArrayList<String> _viatjes= loggedUser.getIdentificadorViatje();
+        viatjes.carregar(_viatjes);
+
+    }
 
     //con estos metodos podemos hacer los recyclerViews para que puedas escrollear por los diferentes viajes.
     //deberia hacer 2 mas y entonces que gestor viajes una vez lea datos los ordene en 3 listas y pasarle a cada adapter una lista.
     //mirar como funciona el onclick (lo mas facil sera mirar el nombre
     RecyclerView rv;
     RecyclerViewAdapter rva;
+
     public void setRecyclerView(RecyclerView recyclerView, Context con){
         rv = recyclerView;
         rva = new RecyclerViewAdapter(viatjes.getLlistat(), con);
@@ -88,13 +98,14 @@ public class Controller {
 
 
     //hay que hacer que haga algun tipo de wait para que tanto el adapter como el cambio de actividad se haga a la vez
-    boolean addViatje(String nomViatje, String inici, String fin){
+    boolean addViatje(String nomViatje, String inici, String fin, Boolean hasPortada){
         if(!loggedUser.checkViatje(nomViatje)){
             return false;
         }
         loggedUser.addViatje(loggedUser.getEmail()+"."+nomViatje, inici, fin);
         users.updateUser(loggedUser);
-        viatjes.updateViatje(new Viatje(nomViatje, inici,fin, loggedUser.getEmail()));
+        viatjes.updateViatje(new Viatje(nomViatje, inici,fin, loggedUser.getEmail(), hasPortada));
+        setAdapter();
         return true;
     }
 
