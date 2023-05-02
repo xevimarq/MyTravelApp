@@ -41,5 +41,7 @@ public class viatjeActivity extends AppCompatActivity {
         controller.login(user.getEmail());
         startActivity(new Intent(this, mainviatjesActivty.class));
     }
-
+    public void profileButtonClick(View view){
+        startActivity(new Intent(this, profileActivity.class));
+    }
 }
