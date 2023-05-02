@@ -87,8 +87,7 @@ public class registerActivity extends AppCompatActivity {
     public void register(View view){
 
         String[] dades = {email.getText().toString().trim(),password.getText().toString().trim(),nom.getText().toString().trim(),cognom.getText().toString().trim()};
-        TextView texto = findViewById(R.id.textView);
-        texto.setText("a");
+
 
         mAuth.createUserWithEmailAndPassword(email.getText().toString().trim(), password.getText().toString().trim())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -102,8 +101,6 @@ public class registerActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
-                            texto.setText("b");
-                            texto.setText(("c"));
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -114,7 +111,9 @@ public class registerActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    public void goLogin(View view){
+        startActivity(new Intent(this, loginActivity.class));
+    }
 
 
 
