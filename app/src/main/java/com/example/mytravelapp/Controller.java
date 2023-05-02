@@ -48,7 +48,7 @@ public class Controller {
     }
 
     public void loadViatjes(){
-
+        viatjes.clearViatjes();
         ArrayList<String> _viatjes= loggedUser.getIdentificadorViatje();
         viatjes.carregar(_viatjes);
 
@@ -141,4 +141,5 @@ public class Controller {
     public void setViatjeActual(int viatje){
         viatjeActual = viatje;
     }
+
 }

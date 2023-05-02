@@ -72,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/home_icon"
+            android:onClick="goHome"
             android:scaleType="centerInside"
             android:padding="16dp"
             android:background="@android:color/transparent"/>

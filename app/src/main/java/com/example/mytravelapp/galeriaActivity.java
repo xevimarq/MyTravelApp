@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 public class galeriaActivity extends AppCompatActivity {
@@ -24,7 +27,7 @@ public class galeriaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GaleryViewAdapter adapter;
     private ArrayList<Uri> listaImagenes = new ArrayList<>();
-
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ArrayList<String> id = new ArrayList<>();
     private ImageButton addButton;
     Viatje viatje;
@@ -93,5 +96,10 @@ public class galeriaActivity extends AppCompatActivity {
 
     public ArrayList<Uri> getIdentificadorImatges() {
         return this.listaImagenes;
+    }
+    public void goHome(View view){
+        FirebaseUser user = mAuth.getCurrentUser();
+        controller.login(user.getEmail());
+        startActivity(new Intent(this, mainviatjesActivty.class));
     }
 }

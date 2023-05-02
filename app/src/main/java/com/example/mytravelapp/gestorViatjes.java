@@ -41,7 +41,9 @@ public class gestorViatjes {
             });
         }
     }
-
+    public void clearViatjes(){
+        llistat.clear();
+    }
     public void updateViatje(Viatje viatje, boolean nou){
         db.collection("viatjes").document(viatje.getIdViatje()).set(viatje);
         if(nou) {

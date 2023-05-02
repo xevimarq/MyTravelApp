@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.ktx.Firebase;
 
 public class profileActivity extends AppCompatActivity {
@@ -41,4 +42,9 @@ public class profileActivity extends AppCompatActivity {
             startActivity(sortir);
             finish();
         }
+    public void goHome(View view){
+        FirebaseUser user = mAuth.getCurrentUser();
+        controller.login(user.getEmail());
+        startActivity(new Intent(this, mainviatjesActivty.class));
+    }
 }
