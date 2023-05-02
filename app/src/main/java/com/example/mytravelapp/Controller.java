@@ -54,6 +54,10 @@ public class Controller {
 
     }
 
+    public void updateViatje(Viatje viatje){
+        viatjes.updateViatje(viatje, false);
+    }
+
     public Viatje getViatjeActual(){
         return viatjes.getLlistat().get(viatjeActual);
     }
@@ -97,6 +101,10 @@ public class Controller {
             Log.w("a", "catched");
             throw e;
         }
+    }
+
+    void addUser(User user){
+        users.addUser(user);
     }
 
     void login(String email){

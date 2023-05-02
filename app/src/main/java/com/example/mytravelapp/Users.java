@@ -24,6 +24,10 @@ public class Users {
         db.collection("users").document(data[0]).set(new User(data[0],data[1],data[2],data[3]));
     }
 
+    public void addUser(User user){
+        db.collection("users").document(user.getEmail()).set(user);
+    }
+
 
     public void login(String email){
         db.collection("users").document(email).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
