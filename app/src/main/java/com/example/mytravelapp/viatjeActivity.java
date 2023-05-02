@@ -36,6 +36,9 @@ public class viatjeActivity extends AppCompatActivity {
     public void iniciarGaleria(View view){
         startActivity(new Intent(this, galeriaActivity.class));
     }
+    public void iniciarDespeses(View view){
+        startActivity(new Intent(this, despesaActivity.class));
+    }
     public void goHome(View view){
         FirebaseUser user = mAuth.getCurrentUser();
         controller.login(user.getEmail());

@@ -4,11 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".viatjeActivity"><![CDATA[>
-
-
-
-    ]]>
+    tools:context=".viatjeActivity">
 
     <Button
         android:id="@+id/addButton"
@@ -32,6 +28,12 @@
             android:layout_height="wrap_content"
             android:onClick="iniciarGaleria"
             android:text="Enter galeria" />
+        <Button
+            android:id="@+id/enterDespeses"
+            android:layout_width="207dp"
+            android:layout_height="wrap_content"
+            android:onClick="iniciarDespeses"
+            android:text="Despeses" />
     </LinearLayout>
     <!-- Footer -->
     <LinearLayout
