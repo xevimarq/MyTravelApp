@@ -42,9 +42,11 @@ public class gestorViatjes {
         }
     }
 
-    public void updateViatje(Viatje viatje){
+    public void updateViatje(Viatje viatje, boolean nou){
         db.collection("viatjes").document(viatje.getIdViatje()).set(viatje);
-        llistat.add(viatje);
+        if(nou) {
+            llistat.add(viatje);
+        }
     }
 
     public ArrayList<Viatje> getLlistat() {
@@ -58,7 +60,8 @@ public class gestorViatjes {
             ref = st.getReference().child("images/"+email+"/"+nom+"/portada");
         }
         else{
-            ref = st.getReference().child("images/" + email + "/" + nom + "/Foto");
+            ref = st.getReference().child("images/" + email + "/" + nom + "/" +path.getLastPathSegment());
+            Log.w("a",path.toString());
         }
         ref.putFile(path);
     }

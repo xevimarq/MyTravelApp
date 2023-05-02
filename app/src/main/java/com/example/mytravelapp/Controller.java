@@ -54,12 +54,19 @@ public class Controller {
 
     }
 
-    public void loadImatges(ArrayList<Uri> listaImagenes){
-        Viatje viatjeSeleccionado = viatjes.getLlistat().get(viatjeActual);
+    public Viatje getViatjeActual(){
+        return viatjes.getLlistat().get(viatjeActual);
+    }
+
+    public void uploadImatges(ArrayList<Uri> listaImagenes){
+        Viatje viatjeSeleccionado = getViatjeActual();
         String idViatje = viatjeSeleccionado.getIdViatje();
 
-        imatges.addImage(idViatje, listaImagenes);
-
+        for (Uri u: listaImagenes){
+            afegirFoto(viatjeSeleccionado.getAdministrador(), viatjeSeleccionado.getNom(),u, 1);
+            viatjeSeleccionado.addIdfoto(u.getLastPathSegment());
+            viatjes.updateViatje(viatjeSeleccionado, false);
+        }
     }
     //con estos metodos podemos hacer los recyclerViews para que puedas escrollear por los diferentes viajes.
     //deberia hacer 2 mas y entonces que gestor viajes una vez lea datos los ordene en 3 listas y pasarle a cada adapter una lista.
@@ -114,13 +121,13 @@ public class Controller {
         }
         loggedUser.addViatje(loggedUser.getEmail()+"."+nomViatje, inici, fin);
         users.updateUser(loggedUser);
-        viatjes.updateViatje(new Viatje(nomViatje, inici,fin, loggedUser.getEmail(), hasPortada));
+        viatjes.updateViatje(new Viatje(nomViatje, inici,fin, loggedUser.getEmail(), hasPortada), true);
         setAdapter();
         return true;
     }
 
-    public void afegirFoto(String nom, Uri path, int select){
-        viatjes.afegirFoto(loggedUser.getEmail(),nom, path,select);
+    public void afegirFoto(String email,String nom, Uri path, int select){
+        viatjes.afegirFoto(email,nom, path,select);
     }
 
     public ArrayList<String> getIdViatjesPublics() {
