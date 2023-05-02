@@ -94,6 +94,7 @@
             android:onClick="profileButtonClick"
             android:padding="16dp"
             android:scaleType="centerInside"
+            android:onClick="profileButtonClick"
             android:src="@drawable/profile_icon" />
     </LinearLayout>
 
