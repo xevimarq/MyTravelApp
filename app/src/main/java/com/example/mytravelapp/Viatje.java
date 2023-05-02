@@ -52,7 +52,6 @@ public class Viatje implements Serializable {
         this.identificadorImatges = identificadorImatges;
     }
 
-
     public String getNom() {
         return nom;
     }
@@ -115,6 +114,10 @@ public class Viatje implements Serializable {
 
     public void setHasPortada(boolean hasPortada) {
         this.hasPortada = hasPortada;
+    }
+
+    public void addIdfoto(String id){
+        identificadorImatges.add(id);
     }
 
 }

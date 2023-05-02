@@ -10,16 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GaleryViewAdapter extends RecyclerView.Adapter<GaleryViewAdapter.ViewHolder> {
 
-    private ArrayList<Uri> listaImagenes;
+    private ArrayList<String> listaImagenes;
+    Context mcontext;
+    Controller cr;
 
-    public GaleryViewAdapter(ArrayList<Uri> listaImagenes) {
+    public GaleryViewAdapter(ArrayList<String> listaImagenes, Context con) {
         this.listaImagenes = listaImagenes;
+        mcontext = con;
+        cr = Controller.getInstance();
     }
 
     @NonNull
@@ -31,8 +37,8 @@ public class GaleryViewAdapter extends RecyclerView.Adapter<GaleryViewAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Uri imageUri = listaImagenes.get(position);
-        holder.fotoImageView.setImageURI(imageUri);
+        StorageReference st = FirebaseStorage.getInstance().getReference("images/" + cr.getViatjeActual().getAdministrador() + "/" + cr.getViatjeActual().getNom() + "/" + listaImagenes.get(position));
+        Glide.with(mcontext).load(st).centerCrop().into(holder.fotoImageView);
     }
 
     @Override
