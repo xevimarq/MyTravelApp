@@ -23,9 +23,11 @@ public class Controller {
 
     private Users users;
     private gestorViatjes viatjes;
+    private Imatges imatges;
 
     private int viatjeActual;
     User loggedUser;
+    galeriaActivity imatge;
     //a este metodo se accede desde el users
     public void setLoggedUser(User user){
         loggedUser = user;
@@ -35,6 +37,7 @@ public class Controller {
         db = FirebaseFirestore.getInstance();
         users = new Users(db);
         viatjes = new gestorViatjes(db);
+        imatges = new Imatges(db);
     };
 
     public static Controller getInstance(){
@@ -51,6 +54,13 @@ public class Controller {
 
     }
 
+    public void loadImatges(ArrayList<Uri> listaImagenes){
+        Viatje viatjeSeleccionado = viatjes.getLlistat().get(viatjeActual);
+        String idViatje = viatjeSeleccionado.getIdViatje();
+
+        imatges.addImage(idViatje, listaImagenes);
+
+    }
     //con estos metodos podemos hacer los recyclerViews para que puedas escrollear por los diferentes viajes.
     //deberia hacer 2 mas y entonces que gestor viajes una vez lea datos los ordene en 3 listas y pasarle a cada adapter una lista.
     //mirar como funciona el onclick (lo mas facil sera mirar el nombre

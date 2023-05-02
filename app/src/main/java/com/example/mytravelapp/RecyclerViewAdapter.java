@@ -73,7 +73,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cambiarActivitat = new Intent(mcontext, viatjeActivity.class);
+                Intent cambiarActivitat = new Intent(mcontext, galeriaActivity.class);
                 cambiarActivitat.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 cr.setViatjeActual(holder.getAdapterPosition());
                 mcontext.startActivity(cambiarActivitat);
