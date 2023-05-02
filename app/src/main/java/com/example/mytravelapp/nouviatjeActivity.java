@@ -19,6 +19,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
 
 import java.io.File;
@@ -30,7 +32,7 @@ public class nouviatjeActivity extends AppCompatActivity {
     int requestImage = 22;
     Button createButton, uploadButton;
     EditText nom, inici, fi;
-
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     ImageView imatge;
 
     @Override
@@ -116,6 +118,10 @@ public class nouviatjeActivity extends AppCompatActivity {
         }
     }
 
-
+    public void goHome(View view){
+        FirebaseUser user = mAuth.getCurrentUser();
+        controller.login(user.getEmail());
+        startActivity(new Intent(this, mainviatjesActivty.class));
+    }
 
 }
