@@ -6,6 +6,7 @@ import android.net.Uri;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Viatje implements Serializable {
@@ -20,7 +21,8 @@ public class Viatje implements Serializable {
     ArrayList<String> editors;
     ArrayList<Boolean> publicParts;
 
-    ArrayList<String> identificadorImatge;
+    ArrayList<String> identificadorImatges;
+
 
     Viatje(String nom, String inici, String fi, String email, Boolean _hasPortada){
         this.nom = nom;
@@ -30,7 +32,7 @@ public class Viatje implements Serializable {
         administrador = email;
         editors = new ArrayList<>();
         publicParts = new ArrayList<>();
-        identificadorImatge = new ArrayList<>();
+        identificadorImatges = new ArrayList<>();
         hasPortada = _hasPortada;
         //las 4 partes que pueden ser publicas
 
@@ -40,17 +42,14 @@ public class Viatje implements Serializable {
         publicParts.add(false);
 
     }
-    public ArrayList<String> getIdentificadorImatge() {
-        return identificadorImatge;
+
+
+    public ArrayList<String> getIdentificadorImatges() {
+        return identificadorImatges;
     }
 
-    public void addImatge(String id){
-        String idImatge = id;
-        identificadorImatge.add(idImatge);
-
-    }
-    public void setIdentificadorImatge(ArrayList<String> id) {
-        this.identificadorImatge = id;
+    public void setIdentificadorImatges(ArrayList<String> identificadorImatges) {
+        this.identificadorImatges = identificadorImatges;
     }
 
 
