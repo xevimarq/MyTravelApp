@@ -100,5 +100,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             data = itemView.findViewById(R.id.dataViatje);
             foto = itemView.findViewById(R.id.fotoViatje);
         }
+
     }
 }

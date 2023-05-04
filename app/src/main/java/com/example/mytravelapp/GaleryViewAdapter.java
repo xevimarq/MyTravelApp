@@ -34,7 +34,9 @@ public class GaleryViewAdapter extends RecyclerView.Adapter<GaleryViewAdapter.Vi
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_imatge, parent, false);
         return new ViewHolder(view);
     }
-
+    public void onChanged() {
+        // Do nothing
+    }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         StorageReference st = FirebaseStorage.getInstance().getReference("images/" + cr.getViatjeActual().getAdministrador() + "/" + cr.getViatjeActual().getNom() + "/" + listaImagenes.get(position));
@@ -56,4 +58,6 @@ public class GaleryViewAdapter extends RecyclerView.Adapter<GaleryViewAdapter.Vi
         }
     }
 }
+
+
 

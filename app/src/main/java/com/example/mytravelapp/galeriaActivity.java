@@ -46,7 +46,6 @@ public class galeriaActivity extends AppCompatActivity {
         adapter = new GaleryViewAdapter(id, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +64,8 @@ public class galeriaActivity extends AppCompatActivity {
         public void onActivityResult(Uri uri) {
             Uri filepath = uri;
             listaImagenes.add(filepath);
-            adapter.notifyDataSetChanged();
             controller.uploadImatges(listaImagenes);
+            adapter.notifyDataSetChanged();
         }
     });
 

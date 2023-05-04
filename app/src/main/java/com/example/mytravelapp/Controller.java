@@ -65,12 +65,15 @@ public class Controller {
     public void uploadImatges(ArrayList<Uri> listaImagenes){
         Viatje viatjeSeleccionado = getViatjeActual();
         String idViatje = viatjeSeleccionado.getIdViatje();
-
-        for (Uri u: listaImagenes){
+        Uri u = listaImagenes.get(listaImagenes.size()-1);
+        afegirFoto(viatjeSeleccionado.getAdministrador(), viatjeSeleccionado.getNom(),u, 1);
+        viatjeSeleccionado.addIdfoto(u.getLastPathSegment());
+        viatjes.updateViatje(viatjeSeleccionado, false);
+        /*for (Uri u: listaImagenes){
             afegirFoto(viatjeSeleccionado.getAdministrador(), viatjeSeleccionado.getNom(),u, 1);
             viatjeSeleccionado.addIdfoto(u.getLastPathSegment());
             viatjes.updateViatje(viatjeSeleccionado, false);
-        }
+        }*/
     }
     //con estos metodos podemos hacer los recyclerViews para que puedas escrollear por los diferentes viajes.
     //deberia hacer 2 mas y entonces que gestor viajes una vez lea datos los ordene en 3 listas y pasarle a cada adapter una lista.
