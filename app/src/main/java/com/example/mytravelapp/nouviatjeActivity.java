@@ -1,5 +1,6 @@
 package com.example.mytravelapp;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -11,7 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.DatePicker;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,6 +28,7 @@ import com.google.firebase.storage.FileDownloadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 
 public class nouviatjeActivity extends AppCompatActivity {
     Controller controller;
@@ -34,6 +38,8 @@ public class nouviatjeActivity extends AppCompatActivity {
     EditText nom, inici, fi;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     ImageView imatge;
+    TextView iniciText, finalText;
+    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +54,47 @@ public class nouviatjeActivity extends AppCompatActivity {
         createButton.setEnabled(false);
         uploadButton = findViewById(R.id.uploadButton);
         nom = findViewById(R.id.nomViatge);
-        inici = findViewById(R.id.iniciText);
-        fi = findViewById(R.id.iniciFinal);
+        /*inici = findViewById(R.id.iniciText);
+        fi = findViewById(R.id.iniciFinal);*/
 
         createButton.setOnClickListener(this::createNew);
         uploadButton.setOnClickListener(this::uploadPhoto);
         nom.addTextChangedListener(activarBoto);
-        inici.addTextChangedListener(activarBoto);
-        fi.addTextChangedListener(activarBoto);
+        /*inici.addTextChangedListener(activarBoto);
+        fi.addTextChangedListener(activarBoto);*/
+        iniciText = findViewById(R.id.iniciText);
+        finalText = findViewById(R.id.finalText);
+        calendar = Calendar.getInstance();
 
+        iniciText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker(iniciText);
+            }
+        });
 
+        finalText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker(finalText);
+            }
+        });
+
+    }
+    private void showDatePicker(final TextView textView) {
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(nouviatjeActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        textView.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                    }
+                }, year, month, day);
+
+        datePickerDialog.show();
     }
 
     //listeners per activar el butó
@@ -69,8 +106,8 @@ public class nouviatjeActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            if(!nom.getText().toString().trim().isEmpty() && !inici.getText().toString().trim().isEmpty() &&
-                    !fi.getText().toString().trim().isEmpty() ) {
+            if(!nom.getText().toString().trim().isEmpty() && !iniciText.getText().toString().trim().isEmpty() &&
+                    !finalText.getText().toString().trim().isEmpty() ) {
 
                 createButton.setEnabled(true);
             }
@@ -106,7 +143,7 @@ public class nouviatjeActivity extends AppCompatActivity {
             });
 
     public void createNew(View view){
-        if(controller.addViatje(nom.getText().toString().trim(), inici.getText().toString().trim(),fi.getText().toString().trim(),filepath!=null)) {
+        if(controller.addViatje(nom.getText().toString().trim(), iniciText.getText().toString().trim(),finalText.getText().toString().trim(),filepath!=null)) {
             if(filepath!=null){
                 controller.afegirFoto(controller.getMail(),nom.getText().toString().trim(),filepath, 0);
 

@@ -65,13 +65,17 @@
             android:textAllCaps="true"
             android:padding="12dp"/>
 
-        <EditText
+        <TextView
             android:id="@+id/iniciText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:hint="Data inici"
-            android:padding="16dp" />
+            android:text="Selecciona"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="showDatePicker" />
 
         <TextView
             android:layout_width="match_parent"
@@ -82,13 +86,17 @@
             android:textAllCaps="true"
             android:padding="12dp"/>
 
-        <EditText
-            android:id="@+id/iniciFinal"
+        <TextView
+            android:id="@+id/finalText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:hint="Data final"
-            android:padding="16dp" />
+            android:text="Selecciona"
+            android:textSize="16sp"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="showDatePicker" />
 
         <Button
             android:id="@+id/uploadButton"
@@ -166,7 +174,4 @@
             android:scaleType="centerInside"
             android:src="@drawable/profile_icon" />
     </LinearLayout>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
