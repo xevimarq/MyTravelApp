@@ -37,7 +37,9 @@ public class mainviatjesActivty extends AppCompatActivity {
         startActivity(new Intent(this, profileActivity.class));
     }
 
-
+    public void worldClick(View view){
+        startActivity(new Intent(this, esdevenimentActivity.class));
+    }
     public void createNew(View view){
         startActivity(new Intent(this, nouviatjeActivity.class));
     }

@@ -148,6 +148,7 @@ public class nouviatjeActivity extends AppCompatActivity {
                 controller.afegirFoto(controller.getMail(),nom.getText().toString().trim(),filepath, 0);
 
             }
+
             finish();
 
         }else {
