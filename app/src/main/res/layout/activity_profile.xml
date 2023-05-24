@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageProfile"
         android:layout_width="128dp"
         android:layout_height="170dp"
         android:layout_marginStart="28dp"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="9dp"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageProfile"
         app:layout_constraintTop_toBottomOf="@+id/text_nom" />
 
     <TextView
@@ -44,7 +44,7 @@
         android:layout_marginEnd="170dp"
         android:text="Cognom:"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageProfile"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -57,7 +57,7 @@
         android:text="Mail:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageProfile"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -69,7 +69,7 @@
         android:layout_marginEnd="168dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/imageProfile"
         app:layout_constraintTop_toBottomOf="@+id/text_cognom" />
 
     <TextView
@@ -85,8 +85,8 @@
 
     <Button
         android:id="@+id/bottonLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="72dp"
         android:layout_marginTop="272dp"
         android:onClick="logout"
         android:text="Sortir de la sessió"
@@ -150,5 +150,14 @@
             android:scaleType="centerInside"
             android:src="@drawable/profile_icon" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/afegirFoto_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="Afegir/Canviar Foto"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="195dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
