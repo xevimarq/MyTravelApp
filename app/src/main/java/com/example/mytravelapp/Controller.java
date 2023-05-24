@@ -32,6 +32,9 @@ public class Controller {
     public void setLoggedUser(User user){
         loggedUser = user;
     }
+    public User getLoggedUser(){
+        return loggedUser;
+    }
 
     private Controller(){
         db = FirebaseFirestore.getInstance();

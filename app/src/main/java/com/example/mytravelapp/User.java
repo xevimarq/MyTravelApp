@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class User implements Serializable {
 
     private String email, password, name, cognom;
-
+    boolean hasProfilePhoto;
     private ArrayList<String> identificadorViatje;
 
     public User(){
@@ -17,11 +17,18 @@ public class User implements Serializable {
         this.password = password;
         this.name = name;
         this.cognom = cognom;
+        this.hasProfilePhoto = false;
         identificadorViatje = new ArrayList<>();
     }
 
     //el id sera de formato (8 digitos hexadecimales),
 
+    public boolean gethasProfilePhoto() {
+        return hasProfilePhoto;
+    }
+    public void setHasProfilePhoto() {
+        hasProfilePhoto = true;
+    }
     public String getEmail() {
         return email;
     }

@@ -32,7 +32,7 @@ public class gestorViatjes {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     llistat.add(documentSnapshot.toObject(Viatje.class));
-                    Log.w("agregat","siuu");
+                    Log.w("agregat","siuuuu");
                     if(ids.get(ids.size()-1).equals(id)){
                         cr = Controller.getInstance();
                         cr.setAdapter();
