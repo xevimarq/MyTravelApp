@@ -55,6 +55,7 @@
             android:src="@drawable/world_icon"
             android:scaleType="centerInside"
             android:padding="16dp"
+            android:onClick="worldClick"
             android:background="@android:color/transparent"/>
 
         <ImageButton
@@ -73,6 +74,7 @@
             android:src="@drawable/home_icon"
             android:scaleType="centerInside"
             android:padding="16dp"
+            android:onClick="goHome"
             android:background="@android:color/transparent"/>
 
         <ImageButton

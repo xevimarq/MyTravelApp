@@ -109,6 +109,7 @@
             android:layout_weight="1"
             android:src="@drawable/world_icon"
             android:scaleType="centerInside"
+            android:onClick="worldClick"
             android:padding="16dp"
             android:background="@android:color/transparent"/>
 

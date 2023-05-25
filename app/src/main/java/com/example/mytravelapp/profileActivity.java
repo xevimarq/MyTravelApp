@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Context;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -91,5 +92,17 @@ public class profileActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         controller.login(user.getEmail());
         startActivity(new Intent(this, mainviatjesActivty.class));
+    }
+    //metodos para todos los activity con la barra inferior
+    public void profileButtonClick(View view){
+        Toast.makeText(profileActivity.this, "Ja ets al perfil",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    public void homeButtonClick(View view){
+        startActivity(new Intent(this, mainviatjesActivty.class));
+    }
+    public void worldClick(View view){
+        startActivity(new Intent(this, esdevenimentActivity.class));
     }
 }

@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class activity_documents extends AppCompatActivity {
 
@@ -33,5 +35,22 @@ public class activity_documents extends AppCompatActivity {
 
     void newDocs(View view){
 
+    }
+
+
+
+
+
+
+    // Metodes menu barra inferior
+    public void profileButtonClick(View view){
+        startActivity(new Intent(this, profileActivity.class));
+    }
+
+    public void homeButtonClick(View view){
+        startActivity(new Intent(this, mainviatjesActivty.class));
+    }
+    public void worldClick(View view){
+        startActivity(new Intent(this, esdevenimentActivity.class));
     }
 }
