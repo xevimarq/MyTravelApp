@@ -35,6 +35,14 @@
             android:layout_height="wrap_content"
             android:onClick="iniciarDespeses"
             android:text="Despeses" />
+
+        <Button
+            android:id="@+id/enterDocs"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:onClick="iniciarDocs"
+            android:text="Documents"
+            android:textAllCaps="true" />
     </LinearLayout>
     <!-- Footer -->
     <LinearLayout
