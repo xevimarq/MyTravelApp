@@ -33,11 +33,20 @@
         app:layout_constraintTop_toBottomOf="@id/header_text"
         app:layout_constraintBottom_toTopOf="@id/footer_layout">
 
+        <ProgressBar
+            android:id="@+id/loading_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/llistaFotos"
             android:layout_width="match_parent"
             android:layout_height="616dp"
             android:clickable="false" />
+
+
+
     </LinearLayout>
 
     <!-- Footer -->
@@ -49,6 +58,9 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
+        <!-- Botones del pie de página -->
+
+        <!-- ImageButton 1 -->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -58,6 +70,7 @@
             android:padding="16dp"
             android:background="@android:color/transparent"/>
 
+        <!-- ImageButton 2 -->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -67,6 +80,7 @@
             android:padding="16dp"
             android:background="@android:color/transparent"/>
 
+        <!-- ImageButton 3 -->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -77,6 +91,7 @@
             android:padding="16dp"
             android:background="@android:color/transparent"/>
 
+        <!-- ImageButton 4 -->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -86,6 +101,7 @@
             android:padding="16dp"
             android:background="@android:color/transparent"/>
 
+        <!-- ImageButton 5 -->
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -97,6 +113,7 @@
             android:src="@drawable/profile_icon" />
     </LinearLayout>
 
+    <!-- Botón para añadir fotos -->
     <ImageButton
         android:id="@+id/add_button"
         android:layout_width="60dp"
@@ -109,6 +126,5 @@
         app:layout_constraintEnd_toEndOf="@id/formulari_layout"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

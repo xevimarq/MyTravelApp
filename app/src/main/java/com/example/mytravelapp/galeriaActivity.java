@@ -6,6 +6,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -34,6 +35,10 @@ public class galeriaActivity extends AppCompatActivity {
     Viatje viatje;
     private Controller controller;
 
+    private ProgressBar loadingProgress;
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,8 @@ public class galeriaActivity extends AppCompatActivity {
         adapter = new GaleryViewAdapter(id, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        loadingProgress = findViewById(R.id.loading_progress);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,8 +71,10 @@ public class galeriaActivity extends AppCompatActivity {
         public void onActivityResult(Uri uri) {
             Uri filepath = uri;
             listaImagenes.add(filepath);
-            controller.uploadImatges(listaImagenes);
             adapter.notifyDataSetChanged();
+            loadingProgress.setVisibility(View.VISIBLE);
+            controller.uploadImatges(listaImagenes);
+            loadingProgress.setVisibility(View.GONE);
         }
     });
 
