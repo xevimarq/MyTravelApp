@@ -22,8 +22,8 @@ public class mainviatjesActivty extends AppCompatActivity {
 
         controller = Controller.getInstance();
 
-        createButton = findViewById(R.id.add_button);
-        vistaViatjes = findViewById(R.id.llistaMain);
+        createButton = findViewById(R.id.addDocs_button);
+        vistaViatjes = findViewById(R.id.llistaDocs);
         GridLayoutManager layoutManager=new GridLayoutManager(this,1);
         vistaViatjes.setLayoutManager(layoutManager);
         controller.setRecyclerView(vistaViatjes, getApplicationContext());

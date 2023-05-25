@@ -2,8 +2,6 @@ package com.example.mytravelapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -14,7 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,7 +43,7 @@ public class galeriaActivity extends AppCompatActivity {
         controller = Controller.getInstance();
         viatje = controller.getViatjeActual();
         recyclerView = findViewById(R.id.llistaFotos);
-        addButton = findViewById(R.id.add_button);
+        addButton = findViewById(R.id.addDocs_button);
         id = controller.getViatjeActual().getIdentificadorImatges();
         adapter = new GaleryViewAdapter(id, this);
         recyclerView.setAdapter(adapter);

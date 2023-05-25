@@ -115,7 +115,7 @@
 
     <!-- Botón para añadir fotos -->
     <ImageButton
-        android:id="@+id/add_button"
+        android:id="@+id/addDocs_button"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/add_icon"
