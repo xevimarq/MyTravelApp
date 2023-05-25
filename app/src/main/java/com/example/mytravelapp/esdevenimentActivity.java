@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TextView;
@@ -24,7 +25,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-
 public class esdevenimentActivity extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
@@ -32,7 +32,7 @@ public class esdevenimentActivity extends AppCompatActivity {
     CalendarView calendarView;
     Controller controller;
     FirebaseFirestore db;
-    List<String> tripDates; // Lista de fechas de los viajes en formato de cadena de texto
+    ArrayList<String> tripDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +43,38 @@ public class esdevenimentActivity extends AppCompatActivity {
         calendarView = findViewById(R.id.calendar);
 
         db = FirebaseFirestore.getInstance();
-
-
+        retrieveTripDates();
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                String selectedDate = formatDate(year, month, dayOfMonth);
+                if (tripDates.contains(selectedDate)) {
+                    int index = tripDates.indexOf(selectedDate);
+                    String tripName = controller.getTripName(index);
+                    tripInfoText.setText(tripName);
+                } else {
+                    tripInfoText.setText("No hay viaje en esa fecha");
+                }
+            }
+        });
+    }
+    private void retrieveTripDates() {
+        tripDates = controller.getTripDate();
+        Log.w("aaa",tripDates.get(1));
     }
 
+    private String formatDate(int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, dayOfMonth);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        return sdf.format(calendar.getTime());
+    }
 
     public void profileButtonClick(View view) {
         startActivity(new Intent(this, profileActivity.class));
     }
-    public void goHome(View view){
+
+    public void goHome(View view) {
         FirebaseUser user = mAuth.getCurrentUser();
         controller.login(user.getEmail());
         startActivity(new Intent(this, mainviatjesActivty.class));

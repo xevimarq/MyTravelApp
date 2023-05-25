@@ -94,8 +94,19 @@ public class Controller {
         rva.setDades(viatjes.getLlistat());
         rv.setAdapter(rva);
     }
+    public String getTripName(int index) {
+        Viatje viatje = viatjes.getLlistat().get(index);
+        return viatje.getNom();
+    }
 
-
+    public ArrayList<String> getTripDate(){
+        ArrayList<Viatje> lista = viatjes.getLlistat();
+        ArrayList<String> devolucion = new ArrayList<>();
+        for(Viatje v:lista){
+            devolucion.add(v.getIniciViatje());
+        }
+        return devolucion;
+    }
 
 
 

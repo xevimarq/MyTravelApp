@@ -82,6 +82,7 @@
             android:layout_weight="1"
             android:src="@drawable/home_icon"
             android:scaleType="centerInside"
+            android:onClick="goHome"
             android:padding="16dp"
             android:background="@android:color/transparent"/>
 

@@ -90,7 +90,16 @@ public class nouviatjeActivity extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        textView.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        String fecha = "";
+                        String dia = "";
+                        if(month<9){
+                            fecha="0";
+                        }
+                        if(dayOfMonth<10){
+                            dia="0";
+                        }
+                        textView.setText(dia+""+dayOfMonth + "/"+fecha+ (month + 1) + "/" + year);
+
                     }
                 }, year, month, day);
 
