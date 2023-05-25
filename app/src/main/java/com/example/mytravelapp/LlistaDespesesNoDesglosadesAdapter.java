@@ -3,9 +3,8 @@ package com.example.mytravelapp;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
-
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,38 +16,40 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder>{
-    private ArrayList<Viatje> dades;
+public class LlistaDespesesNoDesglosadesAdapter extends RecyclerView.Adapter<LlistaDespesesNoDesglosadesAdapter.RecyclerViewHolder>{
+    private Map<String, Object> dades;
+    private Set<String> keys;
     private Controller cr;
     private Context mcontext;
 
-    public RecyclerViewAdapter(ArrayList<Viatje> recyclerDataArrayList, Context mcontext) {
+    public LlistaDespesesNoDesglosadesAdapter(Map<String, Object> recyclerDataArrayList, Context mcontext) {
         cr = Controller.getInstance();
         this.dades = recyclerDataArrayList;
+        this.keys = dades.keySet();
         this.mcontext = mcontext;
     }
 
-    public void setDades(ArrayList<Viatje> viatje){
-        dades = viatje;
+    public void setDades(Map<String, Object> mapa){
+        dades = mapa;
+        this.keys = dades.keySet();
     }
 
     @NonNull
     @Override
-    public RecyclerViewAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LlistaDespesesNoDesglosadesAdapter.RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate Layout
-        View view = LayoutInflater.from(mcontext).inflate(R.layout.card_viatge, parent, false);
-        return new RecyclerViewAdapter.RecyclerViewHolder(view);
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.card_despesasimple, parent, false);
+        return new LlistaDespesesNoDesglosadesAdapter.RecyclerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter.RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LlistaDespesesNoDesglosadesAdapter.RecyclerViewHolder holder, int position) {
         // Set the data to textview and imageview.
-        Viatje viatje = dades.get(position);
-        if(viatje.getHasPortada()) {
-            StorageReference st = FirebaseStorage.getInstance().getReference("images/" + viatje.getAdministrador() + "/" + viatje.getNom() + "/portada");
-            Glide.with(mcontext).load(st).centerCrop().into(holder.foto);
-        }
         /*
         try {
             File localFile = File.createTempFile(viatje.getNom()+"Portada",".jpeg");
@@ -62,17 +63,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             throw new RuntimeException(e);
         }
         */
-        holder.nom.setText(viatje.getNom());
-        holder.data.setText(viatje.getIniciViatje()+"-"+viatje.getFiViatje());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent cambiarActivitat = new Intent(mcontext, viatjeActivity.class);
-                cambiarActivitat.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                cr.setViatjeActual(holder.getAdapterPosition());
-                mcontext.startActivity(cambiarActivitat);
-            }
-        });
+        holder.nom.setText(keys.toArray()[position].toString());
+        holder.data.setText(dades.get(keys.toArray()[position].toString()).toString());
     }
 
     @Override
@@ -85,14 +77,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
         private TextView nom, data;
-        private ImageView foto;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             //importante poner bien los id porfa
-            nom = itemView.findViewById(R.id.nomViatje);
-            data = itemView.findViewById(R.id.dataViatje);
-            foto = itemView.findViewById(R.id.fotoViatje);
+            nom = itemView.findViewById(R.id.nomUsuari);
+            data = itemView.findViewById(R.id.costTotal);
         }
 
     }

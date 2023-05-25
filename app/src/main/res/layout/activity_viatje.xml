@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:onClick="iniciarGaleria"
             android:text="Enter galeria" />
+
         <Button
             android:id="@+id/enterDespeses"
             android:layout_width="207dp"

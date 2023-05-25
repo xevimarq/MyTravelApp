@@ -28,46 +28,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseUser;
 
-public class despesaActivity extends AppCompatActivity {
+public class despesaDesglosadaActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private ArrayList<String> id = new ArrayList<>();
-    private Button addButton, desglose;
     private Controller controller;
+    private View addButton;
     private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_despeses);
+        setContentView(R.layout.activity_despesesdesglose);
         controller = Controller.getInstance();
-        addButton = findViewById(R.id.addDespesa);
-        desglose = findViewById(R.id.botoDespeses);
+        addButton = findViewById(R.id.afegirDespesaDesglosada);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addDespesa();
             }
         });
-        desglose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                botoDespeses();
-            }
-        });
-        recyclerView = findViewById(R.id.RecyclerDespesesTotals);
+        recyclerView = findViewById(R.id.recyclerDespesesDesglosada);
+        controller.recyclerViewLlistaDespesesDesglosada(recyclerView, this);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
-        controller.recyclerViewLlistaDespeses(recyclerView, this);
+        controller.recyclerViewLlistaDespesesDesglosada(recyclerView, this);
     }
 
 
     public void addDespesa(){
         startActivity(new Intent(this, afegirDespesaActivity.class));
     }
-
-    public void botoDespeses(){
-        startActivity(new Intent(this, despesaDesglosadaActivity.class));
-    }
-
-
 }

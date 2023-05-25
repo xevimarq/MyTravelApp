@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class Controller {
 
     private static Controller INSTANCE;
+    private gestorDespeses gestorDespeses;
 
     private FirebaseFirestore db;
 
@@ -151,6 +152,18 @@ public class Controller {
 
     public void setViatjeActual(int viatje){
         viatjeActual = viatje;
+        this.gestorDespeses = new gestorDespeses(getViatjeActual().idViatje);
+    }
+
+    public void recyclerViewLlistaDespeses(RecyclerView rv, Context con){
+        this.gestorDespeses.updateRecycler(rv, con);
+    }
+    public void recyclerViewLlistaDespesesDesglosada(RecyclerView rv, Context con){
+        this.gestorDespeses.updateRecycler2(rv, con);
+    }
+
+    public void addDespesa(String nomD, String nom, Double preu){
+        this.gestorDespeses.addDespesa(nomD, nom, preu);
     }
 
 }
