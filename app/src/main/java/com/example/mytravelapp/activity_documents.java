@@ -46,7 +46,6 @@ public class activity_documents extends AppCompatActivity {
 
         List<Document> documentList = new ArrayList<>(); // Aquí debes obtener la lista de documentos que deseas mostrar
         adapter = new documentAdapter(documentList);
-        documentAdapter adapter = new documentAdapter(documentList);
         vistaDocs.setAdapter(adapter);
         loadUserDocuments();
     }
@@ -90,7 +89,7 @@ public class activity_documents extends AppCompatActivity {
                         String downloadUrl = uri.toString();
 
                         // Crea un objeto Document con la información del archivo
-                        Document newDocument = new Document("Nuevo documento", downloadUrl);
+                        Document newDocument = new Document("Nuevo documento", "Descripcion", downloadUrl);
 
                         // Guarda la información del documento en Firebase Firestore
                         saveDocumentToFirestore(newDocument);
