@@ -37,18 +37,20 @@ public class activity_documents extends AppCompatActivity {
         createButton = findViewById(R.id.addDocs_button);
         vistaDocs = findViewById(R.id.llistaDocs);
 
-        GridLayoutManager layoutManager=new GridLayoutManager(this,1);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         vistaDocs.setLayoutManager(layoutManager);
         controller.setRecyclerView(vistaDocs, getApplicationContext());
 
         createButton.setOnClickListener(this::newDocs);
 
-
-        List<Document> documentList = new ArrayList<>(); // Aquí debes obtener la lista de documentos que deseas mostrar
+        // Crear el adaptador y asignarlo al RecyclerView
         adapter = new documentAdapter(documentList);
         vistaDocs.setAdapter(adapter);
+
+        // Cargar los documentos del usuario desde Firestore
         loadUserDocuments();
     }
+
 
     private static final int REQUEST_CODE_FILE = 123;
 
@@ -112,6 +114,8 @@ public class activity_documents extends AppCompatActivity {
                 .addOnSuccessListener(documentReference -> {
                     // Éxito al guardar el documento en Firestore
                     Toast.makeText(this, "Documento guardado exitosamente", Toast.LENGTH_SHORT).show();
+
+                    loadUserDocuments();
                 })
                 .addOnFailureListener(e -> {
                     // Error al guardar el documento en Firestore
