@@ -1,55 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".esdevenimentActivity">
 
-    <!-- Header -->
     <TextView
         android:id="@+id/header_text"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/blue"
+        android:gravity="center"
         android:text="Esdeveniments"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Formulari -->
     <LinearLayout
         android:id="@+id/formulari_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_margin="16dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/header_text"
-        app:layout_constraintBottom_toTopOf="@id/footer_layout">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/footer_layout"
+        app:layout_constraintTop_toBottomOf="@id/header_text">
 
-        <CalendarView
-            android:id="@+id/calendar"
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="537dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1.5" />
+
 
         <TextView
             android:id="@+id/trip_info_text"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
+            android:layout_weight="0.5"
+            android:clickable="true"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
+
     </LinearLayout>
 
-    <!-- Footer -->
     <LinearLayout
         android:id="@+id/footer_layout"
         android:layout_width="match_parent"
@@ -60,44 +64,44 @@
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/world_icon"
-            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
             android:padding="16dp"
-            android:background="@android:color/transparent"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/world_icon" />
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/search_icon"
-            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
             android:padding="16dp"
-            android:background="@android:color/transparent"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/search_icon" />
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/home_icon"
-            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
             android:onClick="goHome"
             android:padding="16dp"
-            android:background="@android:color/transparent"/>
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/favorite_icon"
             android:scaleType="centerInside"
-            android:padding="16dp"
-            android:background="@android:color/transparent"/>
+            android:src="@drawable/home_icon" />
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="16dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/favorite_icon" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:onClick="profileButtonClick"
