@@ -22,6 +22,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Formulari -->
+
+    <ProgressBar
+        android:id="@+id/loading_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/header_text" />
+
     <LinearLayout
         android:id="@+id/formulari_layout"
         android:layout_width="match_parent"
@@ -33,18 +44,11 @@
         app:layout_constraintTop_toBottomOf="@id/header_text"
         app:layout_constraintBottom_toTopOf="@id/footer_layout">
 
-        <ProgressBar
-            android:id="@+id/loading_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/llistaFotos"
             android:layout_width="match_parent"
-            android:layout_height="616dp"
+            android:layout_height="match_parent"
             android:clickable="false" />
-
 
 
     </LinearLayout>

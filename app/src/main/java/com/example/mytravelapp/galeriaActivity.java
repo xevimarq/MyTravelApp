@@ -45,10 +45,11 @@ public class galeriaActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.llistaFotos);
         addButton = findViewById(R.id.addDocs_button);
         id = controller.getViatjeActual().getIdentificadorImatges();
-        adapter = new GaleryViewAdapter(id, this);
+        loadingProgress = findViewById(R.id.loading_progress);
+        adapter = new GaleryViewAdapter(id, this, this);
+        loadingProgress.setVisibility(View.VISIBLE);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-        loadingProgress = findViewById(R.id.loading_progress);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,10 +72,12 @@ public class galeriaActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
             loadingProgress.setVisibility(View.VISIBLE);
             controller.uploadImatges(listaImagenes);
-            loadingProgress.setVisibility(View.GONE);
         }
     });
 
+    public void carregat(){
+        loadingProgress.setVisibility(View.INVISIBLE);
+    }
     /*
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

@@ -13,15 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/blue"
+        android:gravity="center"
         android:text="Els meus viatges"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Formulari -->
+
     <LinearLayout
         android:id="@+id/formulari_layout"
         android:layout_width="match_parent"
@@ -34,11 +35,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_text">
 
+        <Switch
+            android:id="@+id/switchcompartits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Mostrar viatjes compartits" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/llistaDocs"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="360dp"
             android:clickable="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pastbuton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PAST" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/actualbuton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ACTUAL" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/futurbuton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FUTUR" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- Footer -->
@@ -102,14 +148,26 @@
         android:id="@+id/addDocs_button"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/add_icon"
-        android:scaleType="centerInside"
+        android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         android:padding="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/add_icon"
         app:layout_constraintBottom_toBottomOf="@id/formulari_layout"
         app:layout_constraintEnd_toEndOf="@id/formulari_layout"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp" />
+        app:layout_constraintTop_toTopOf="@+id/formulari_layout"
+        app:layout_constraintVertical_bias="0.89" />
+
+    <ProgressBar
+        android:id="@+id/loadingViatjes"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/header_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

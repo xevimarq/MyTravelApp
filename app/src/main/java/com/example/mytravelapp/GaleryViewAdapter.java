@@ -1,6 +1,7 @@
 package com.example.mytravelapp;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +20,15 @@ import java.util.List;
 public class GaleryViewAdapter extends RecyclerView.Adapter<GaleryViewAdapter.ViewHolder> {
 
     private ArrayList<String> listaImagenes;
+    private galeriaActivity ga;
     Context mcontext;
     Controller cr;
 
-    public GaleryViewAdapter(ArrayList<String> listaImagenes, Context con) {
+    public GaleryViewAdapter(ArrayList<String> listaImagenes, Context con, galeriaActivity g) {
         this.listaImagenes = listaImagenes;
         mcontext = con;
         cr = Controller.getInstance();
+        ga = g;
     }
 
     @NonNull
@@ -41,6 +44,10 @@ public class GaleryViewAdapter extends RecyclerView.Adapter<GaleryViewAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         StorageReference st = FirebaseStorage.getInstance().getReference("images/" + cr.getViatjeActual().getAdministrador() + "/" + cr.getViatjeActual().getNom() + "/" + listaImagenes.get(position));
         Glide.with(mcontext).load(st).centerCrop().into(holder.fotoImageView);
+        if(position == getItemCount()- 1){
+            ga.carregat();
+            Log.w("carregat", "siuu");
+        }
     }
 
     @Override
