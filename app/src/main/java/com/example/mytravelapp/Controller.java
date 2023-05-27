@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Controller {
 
@@ -25,6 +29,9 @@ public class Controller {
     private Users users;
     private gestorViatjes viatjes;
     private Imatges imatges;
+
+    private boolean compartits = true;
+    private int stateViatjes = 0;
 
     private int viatjeActual;
     User loggedUser;
@@ -85,13 +92,64 @@ public class Controller {
     RecyclerView rv;
     RecyclerViewAdapter rva;
 
+    public void setCompartits(boolean compartits) {
+        this.compartits = compartits;
+    }
+
+    public void setStateViatjes(int stateViatjes) {
+        this.stateViatjes = stateViatjes;
+        Log.w("aaaaaaww", "uwu");
+    }
+
     public void setRecyclerView(RecyclerView recyclerView, Context con){
         rv = recyclerView;
         rva = new RecyclerViewAdapter(viatjes.getLlistat(), con);
 
     }
     void setAdapter(){
-        rva.setDades(viatjes.getLlistat());
+
+        ArrayList<Viatje> temp = new ArrayList<>();
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        //todo
+        //arreglar
+        if(stateViatjes != 0 || !compartits) {
+            for (Viatje v : viatjes.getLlistat()){
+                if(compartits || v.getAdministrador().equals(loggedUser.getEmail())){
+                    Date inici;
+                    Date fi;
+                    try {
+                        inici = df.parse(v.getIniciViatje());
+                        fi = df.parse(v.getFiViatje());
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    switch (stateViatjes){
+                        case 0:
+                            temp.add(v);
+                            break;
+                        case 1:
+                            if(date.after(inici) && date.before(fi)){
+                                temp.add(v);
+                            }
+                            break;
+                        case 2:
+                            if(date.before(inici)){
+                                temp.add(v);
+                            }
+                            break;
+                        case 3:
+                            if(date.after(fi)){
+                                temp.add(v);
+                            }
+                            break;
+                    }
+                }
+            }
+        }else{
+            temp = viatjes.getLlistat();
+        }
+        rva.setDades(temp);
         rv.setAdapter(rva);
     }
     public String getTripName(int index) {
