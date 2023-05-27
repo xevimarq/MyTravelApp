@@ -51,4 +51,7 @@ public class viatjeActivity extends AppCompatActivity {
     public void profileButtonClick(View view){
         startActivity(new Intent(this, profileActivity.class));
     }
+    public void calendarClick(View view){
+        startActivity(new Intent(this, esdevenimentActivity.class));
+    }
 }

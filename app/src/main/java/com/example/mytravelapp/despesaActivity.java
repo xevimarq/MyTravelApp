@@ -68,6 +68,8 @@ public class despesaActivity extends AppCompatActivity {
     public void botoDespeses(){
         startActivity(new Intent(this, despesaDesglosadaActivity.class));
     }
-
+    public void calendarClick(View view){
+        startActivity(new Intent(this, esdevenimentActivity.class));
+    }
 
 }

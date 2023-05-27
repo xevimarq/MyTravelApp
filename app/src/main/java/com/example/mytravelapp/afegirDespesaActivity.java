@@ -82,5 +82,8 @@ public class afegirDespesaActivity extends AppCompatActivity {
         controller.addDespesa(nomDespesa.getText().toString().trim(), nom.getText().toString().trim(), Double.parseDouble(preu.getText().toString().trim()));
         finish();
     }
+    public void calendarClick(View view){
+        startActivity(new Intent(this, esdevenimentActivity.class));
+    }
 
 }

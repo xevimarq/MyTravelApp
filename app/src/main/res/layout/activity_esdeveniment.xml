@@ -69,7 +69,8 @@
             android:background="@android:color/transparent"
             android:padding="16dp"
             android:scaleType="centerInside"
-            android:src="@drawable/world_icon" />
+            android:src="@drawable/calendar"
+            android:onClick="calendarClick"/>
 
         <ImageButton
             android:layout_width="0dp"

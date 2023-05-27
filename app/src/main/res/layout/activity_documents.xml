@@ -52,10 +52,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/world_icon"
+            android:src="@drawable/calendar"
             android:scaleType="centerInside"
             android:padding="16dp"
-            android:onClick="worldClick"
+            android:onClick="calendarClick"
             android:background="@android:color/transparent"/>
 
         <ImageButton

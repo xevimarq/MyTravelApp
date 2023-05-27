@@ -108,4 +108,8 @@ public class galeriaActivity extends AppCompatActivity {
         controller.login(user.getEmail());
         startActivity(new Intent(this, mainviatjesActivty.class));
     }
+
+    public void calendarClick(View view){
+        startActivity(new Intent(this, esdevenimentActivity.class));
+    }
 }

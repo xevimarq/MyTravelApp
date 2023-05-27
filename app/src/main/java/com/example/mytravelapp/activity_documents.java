@@ -158,7 +158,7 @@ public class activity_documents extends AppCompatActivity {
     public void homeButtonClick(View view){
         startActivity(new Intent(this, mainviatjesActivty.class));
     }
-    public void worldClick(View view){
+    public void calendarClick(View view){
         startActivity(new Intent(this, esdevenimentActivity.class));
     }
 }
