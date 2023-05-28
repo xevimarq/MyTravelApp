@@ -58,11 +58,16 @@ public class profileActivity extends AppCompatActivity {
             mail.setText(controller.getMail());
             loggedUser = controller.getLoggedUser();
 
-            loggedUser.gethasProfilePhoto();
-            if(loggedUser.gethasProfilePhoto()){
-                //StorageReference st = FirebaseStorage.getInstance().getReference("images/" +controller.getMail()+ "/perfil");
-                Glide.with(this).load("images/" +controller.getMail()+ "/perfil").into(fotoPerfil);
-            }
+            //loggedUser.gethasProfilePhoto()
+            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+            StorageReference imageRef = storageRef.child("images/" + controller.getMail() + "/perfil");
+
+            imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(profileActivity.this).load(uri).into(fotoPerfil);
+                }
+            });
         }
         public void logout(View view){
             mAuth.signOut();
