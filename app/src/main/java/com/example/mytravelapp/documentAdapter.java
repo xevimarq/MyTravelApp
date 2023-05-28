@@ -24,7 +24,7 @@ public class documentAdapter extends RecyclerView.Adapter<documentAdapter.Docume
 
         // ViewHolder
         public class DocumentViewHolder extends RecyclerView.ViewHolder {
-            // Definir las vistas para cada elemento de la lista
+            // Definir  vistas para cada elemento de la lista
 
             public TextView titleTextView;
             public TextView descriptionTextView;
@@ -33,7 +33,6 @@ public class documentAdapter extends RecyclerView.Adapter<documentAdapter.Docume
             public DocumentViewHolder(View itemView) {
                 super(itemView);
                 titleTextView = itemView.findViewById(R.id.titleTextView);
-                descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
                 pdfImageView = itemView.findViewById(R.id.pdfImageView);
             }
         }
@@ -50,20 +49,16 @@ public class documentAdapter extends RecyclerView.Adapter<documentAdapter.Docume
         // Obtener el documento en la posición actual
         Document document = documentList.get(position);
 
-        // Actualizar las vistas con los datos del documento
+        // Actualizar vistas con datos del documento
         holder.titleTextView.setText(document.getTitle());
-        holder.descriptionTextView.setText(document.getDescription());
 
-        // Aquí también puedes agregar la lógica para mostrar el archivo PDF si es necesario
-        // Puedes usar la biblioteca PDF Viewer para mostrar el contenido del PDF en una vista
-
-        // Ejemplo de código para abrir el archivo PDF utilizando la biblioteca PDF Viewer
+        // Abrir pdf
         holder.pdfImageView.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.parse(document.getPdfFilePath()), "application/pdf");
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-            // Verificar si hay alguna aplicación que pueda manejar el archivo PDF
+            // Mira si alguna app puede manejar pdf
             if (intent.resolveActivity(v.getContext().getPackageManager()) != null) {
                 v.getContext().startActivity(intent);
             } else {

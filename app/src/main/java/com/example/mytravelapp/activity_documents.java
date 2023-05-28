@@ -5,12 +5,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +29,8 @@ public class activity_documents extends AppCompatActivity {
     Controller controller;
     ImageButton createButton;
     RecyclerView vistaDocs;
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private documentAdapter adapter;
     private List<Document> documentList = new ArrayList<>();
 
@@ -67,18 +73,20 @@ public class activity_documents extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_FILE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri fileUri = data.getData();
 
-            // Subir el archivo a Firebase Storage
-            uploadFileToFirebaseStorage(fileUri);
+            String fileName = getFileNameFromUri(fileUri);
+
+            // Subir a Firebase Storage
+            uploadFileToFirebaseStorage(fileUri, fileName);
         }
     }
 
-    private void uploadFileToFirebaseStorage(Uri fileUri) {
+    private void uploadFileToFirebaseStorage(Uri fileUri, String fileName) {
         // Obtén la referencia al nodo de Firebase Storage donde deseas guardar los documentos del usuario
         // Puedes utilizar algún identificador único del usuario como parte del path
-        StorageReference userDocsRef = FirebaseStorage.getInstance().getReference().child("user_documents").child(controller.getMail());
+        StorageReference userDocsRef = FirebaseStorage.getInstance().getReference().child("viatjes").child(controller.getViatjeActual().nom);
 
         // Genera un nombre único para el archivo
-        String fileName = "document_" + System.currentTimeMillis();
+        //String fileName = "document_" + System.currentTimeMillis();
 
         // Crea una referencia para el archivo en Firebase Storage
         StorageReference fileRef = userDocsRef.child(fileName);
@@ -91,7 +99,7 @@ public class activity_documents extends AppCompatActivity {
                         String downloadUrl = uri.toString();
 
                         // Crea un objeto Document con la información del archivo
-                        Document newDocument = new Document("Nuevo documento", "Descripcion", downloadUrl);
+                        Document newDocument = new Document(fileName, downloadUrl);
 
                         // Guarda la información del documento en Firebase Firestore
                         saveDocumentToFirestore(newDocument);
@@ -104,10 +112,11 @@ public class activity_documents extends AppCompatActivity {
         loadUserDocuments();
     }
 
+
     private void saveDocumentToFirestore(Document document) {
         // Obtén una referencia a la colección de documentos del usuario actual en Firebase Firestore
         // Puedes utilizar algún identificador único del usuario como parte del path
-        CollectionReference userDocsCollection = FirebaseFirestore.getInstance().collection("user_documents").document(controller.getMail()).collection("documents");
+        CollectionReference userDocsCollection = FirebaseFirestore.getInstance().collection("viatjes").document(controller.getViatjeActual().nom).collection("documents");
 
         // Guarda el documento en Firebase Firestore
         userDocsCollection.add(document)
@@ -123,10 +132,20 @@ public class activity_documents extends AppCompatActivity {
                 });
     }
 
+    private String getFileNameFromUri(Uri uri) {
+        String fileName = null;
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            fileName = cursor.getString(nameIndex);
+            cursor.close();
+        }
+        return fileName;
+    }
     private void loadUserDocuments() {
         // Obtén una referencia a la colección de documentos del usuario actual en Firebase Firestore
         // Puedes utilizar algún identificador único del usuario como parte del path
-        CollectionReference userDocsCollection = FirebaseFirestore.getInstance().collection("user_documents").document(controller.getMail()).collection("documents");
+        CollectionReference userDocsCollection = FirebaseFirestore.getInstance().collection("viatjes").document(controller.getViatjeActual().nom).collection("documents");
 
         // Consulta los documentos del usuario
         userDocsCollection.get()
@@ -150,14 +169,17 @@ public class activity_documents extends AppCompatActivity {
                 });
     }
 
-    // Metodes menu barra inferior
+    // Metodos menu barra inferior
     public void profileButtonClick(View view){
         startActivity(new Intent(this, profileActivity.class));
     }
 
     public void homeButtonClick(View view){
+        FirebaseUser user = mAuth.getCurrentUser();
+        controller.login(user.getEmail());
         startActivity(new Intent(this, mainviatjesActivty.class));
     }
+
     public void calendarClick(View view){
         startActivity(new Intent(this, esdevenimentActivity.class));
     }

@@ -11,12 +11,10 @@ public class Document {
     }
 
     // Constructor con argumentos
-    public Document(String title, String description, String pdfFilePath) {
+    public Document(String title, String pdfFilePath) {
         this.title = title;
-        this.description = description;
         this.pdfFilePath = pdfFilePath;
     }
-
     // Getters y setters
     public String getTitle() {
         return title;
@@ -26,13 +24,13 @@ public class Document {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    //public String getDescription() {
+      //  return description;
+    //}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    //public void setDescription(String description) {
+      //  this.description = description;
+    //}
 
     public String getPdfFilePath() {
         return pdfFilePath;
