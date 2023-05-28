@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 public class mainviatjesActivty extends AppCompatActivity {
 
@@ -87,6 +88,10 @@ public class mainviatjesActivty extends AppCompatActivity {
         startActivity(new Intent(this, profileActivity.class));
     }
 
+    public void goHome(View view){
+        Toast.makeText(mainviatjesActivty.this, "Ja ets a Home",
+                Toast.LENGTH_SHORT).show();
+    }
     public void calendarClick(View view){
         startActivity(new Intent(this, esdevenimentActivity.class));
     }

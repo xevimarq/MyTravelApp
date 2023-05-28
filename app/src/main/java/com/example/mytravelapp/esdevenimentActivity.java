@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -110,6 +111,7 @@ public class esdevenimentActivity extends AppCompatActivity {
         startActivity(new Intent(this, mainviatjesActivty.class));
     }
     public void calendarClick(View view){
-        startActivity(new Intent(this, esdevenimentActivity.class));
+        Toast.makeText(esdevenimentActivity.this, "Ja ets al calendari",
+                Toast.LENGTH_SHORT).show();
     }
 }

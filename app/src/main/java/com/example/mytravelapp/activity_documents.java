@@ -116,7 +116,7 @@ public class activity_documents extends AppCompatActivity {
     private void saveDocumentToFirestore(Document document) {
         // Obtén una referencia a la colección de documentos del usuario actual en Firebase Firestore
         // Puedes utilizar algún identificador único del usuario como parte del path
-        CollectionReference userDocsCollection = FirebaseFirestore.getInstance().collection("viatjes").document(controller.getViatjeActual().nom).collection("documents");
+        CollectionReference userDocsCollection = FirebaseFirestore.getInstance().collection("viatjes").document(controller.getMail()+"."+controller.getViatjeActual().nom).collection("documents");
 
         // Guarda el documento en Firebase Firestore
         userDocsCollection.add(document)
@@ -145,7 +145,7 @@ public class activity_documents extends AppCompatActivity {
     private void loadUserDocuments() {
         // Obtén una referencia a la colección de documentos del usuario actual en Firebase Firestore
         // Puedes utilizar algún identificador único del usuario como parte del path
-        CollectionReference userDocsCollection = FirebaseFirestore.getInstance().collection("viatjes").document(controller.getViatjeActual().nom).collection("documents");
+        CollectionReference userDocsCollection = FirebaseFirestore.getInstance().collection("viatjes").document(controller.getMail()+"."+controller.getViatjeActual().nom).collection("documents");
 
         // Consulta los documentos del usuario
         userDocsCollection.get()
@@ -174,7 +174,7 @@ public class activity_documents extends AppCompatActivity {
         startActivity(new Intent(this, profileActivity.class));
     }
 
-    public void homeButtonClick(View view){
+    public void goHome(View view){
         FirebaseUser user = mAuth.getCurrentUser();
         controller.login(user.getEmail());
         startActivity(new Intent(this, mainviatjesActivty.class));
