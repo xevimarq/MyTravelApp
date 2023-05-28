@@ -134,14 +134,15 @@ public class Controller {
                             }
                             break;
                         case 2:
-                            if(date.before(inici)){
+                            if(date.after(fi)){
                                 temp.add(v);
                             }
                             break;
                         case 3:
-                            if(date.after(fi)){
+                            if(date.before(inici)){
                                 temp.add(v);
                             }
+
                             break;
                     }
                 }
