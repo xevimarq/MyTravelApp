@@ -21,10 +21,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +43,9 @@ public class nouviatjeActivity extends AppCompatActivity {
     ImageView imatge;
     TextView iniciText, finalText;
     Calendar calendar;
+
+
+    boolean fotoPortada = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,20 +154,23 @@ public class nouviatjeActivity extends AppCompatActivity {
                 public void onActivityResult(Uri uri) {
                     filepath = uri;
                     imatge.setImageURI(filepath);
+                    fotoPortada = true;
                 }
             });
 
-    public void createNew(View view){
-        if(controller.addViatje(nom.getText().toString().trim(), iniciText.getText().toString().trim(),finalText.getText().toString().trim(),filepath!=null)) {
-            if(filepath!=null){
-                controller.afegirFoto(controller.getMail(),nom.getText().toString().trim(),filepath, 0);
-
+    public void createNew(View view) {
+        if (controller.addViatje(nom.getText().toString().trim(), iniciText.getText().toString().trim(), finalText.getText().toString().trim(), true)) {
+            if (filepath != null) {
+                controller.afegirFoto(controller.getMail(), nom.getText().toString().trim(), filepath, 0);
+            } else {
+                // Utilizar la imagen por defecto
+                filepath = Uri.parse("android.resource://" + getPackageName() + "/drawable/viaje_portada");
+                fotoPortada=true;
+                controller.afegirFoto(controller.getMail(), nom.getText().toString().trim(), filepath, 0);
             }
-
             finish();
-
-        }else {
-            Toast.makeText(this,"Ja tens un viatje anomenat així", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Ja tens un viatje anomenat així", Toast.LENGTH_SHORT).show();
         }
     }
 
